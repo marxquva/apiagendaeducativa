@@ -1,0 +1,10 @@
+package com.marx.quiroz.apiagendaeducativa.repository;
+
+import com.marx.quiroz.apiagendaeducativa.entity.PerfilEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PerfilRepository extends JpaRepository<PerfilEntity, Integer> {
+    boolean existsByNombre(String nombre);
+}
