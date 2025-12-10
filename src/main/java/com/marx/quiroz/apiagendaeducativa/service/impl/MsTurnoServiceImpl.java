@@ -97,7 +97,6 @@ public class MsTurnoServiceImpl implements MsTurnoService {
         turno.setInstitucionEntity(institucion);
 
         turnoRepository.save(turno);
-
         return new TurnoResponseDto(turno);
     }
 

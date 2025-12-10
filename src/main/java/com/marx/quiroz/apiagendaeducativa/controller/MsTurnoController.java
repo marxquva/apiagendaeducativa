@@ -22,7 +22,7 @@ public class MsTurnoController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<TurnoResponseDto>> obtenerPerfiles() {
+    public ResponseEntity<List<TurnoResponseDto>> obtenerTurnos() {
         List<TurnoResponseDto> turnos = turnoService.obtenerTurnos();
         return ResponseEntity.ok(turnos);
     }
@@ -35,7 +35,7 @@ public class MsTurnoController {
     }
 
     @GetMapping("/get/{idTurno}/institucion/{idInstitucion}")
-    public ResponseEntity<TurnoResponseDto> obtenerTurnoPorIdEInstitucion(
+    public ResponseEntity<TurnoResponseDto> obtenerTurnoPorIdInstitucion(
             @PathVariable Integer idInstitucion,
             @PathVariable Integer idTurno) {
 

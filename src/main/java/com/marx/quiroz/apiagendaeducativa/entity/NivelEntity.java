@@ -12,10 +12,10 @@ public class NivelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_nivel_academico")
-    private Integer idNivelEducativo;
+    private Integer idNivelAcademico;
 
     @Column(name = "nombre_nivel_academico", nullable = false, length = 50)
-    private String nombreIndicador;
+    private String nombreNivelAcademico;
 
     @Column(name = "descripcion")
     private String descripcion;
