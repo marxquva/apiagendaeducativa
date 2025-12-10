@@ -16,7 +16,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public PersonaEntity crearInstitucion(PersonaEntity persona) {
+    public PersonaEntity crearPersona(PersonaEntity persona) {
         return null;
     }
 

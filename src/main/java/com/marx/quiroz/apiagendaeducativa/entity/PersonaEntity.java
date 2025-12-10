@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -32,13 +34,13 @@ public class PersonaEntity {
     @Column(name = "telefono", length = 15)
     private String telefono;
 
-    @Column(name = "email", length = 120)
+    @Column(name = "email", length = 120, unique = true)
     private String email;
 
     @Column(name = "fecha_nacimiento")
     private Date fechaNacimiento;
 
-    @Column(name = "numero_documento", length = 15)
+    @Column(name = "numero_documento", length = 15, unique = true)
     private String numeroDocumento;
 
     @Column(name = "fecha_creacion")
@@ -51,10 +53,11 @@ public class PersonaEntity {
     private Integer estado = 1;
 
     @ManyToOne
-    @JoinColumn(
-            name = "id_tipo_documento_fk",
-            referencedColumnName = "id_tipo_documento"
-    )
+    @JoinColumn(name = "id_tipo_documento_fk", referencedColumnName = "id_tipo_documento")
     private TipoDocumentoEntity tipoDocumento;
+
+    @OneToMany(mappedBy = "persona", fetch = FetchType.LAZY)
+    private List<PersonaInstitucionEntity> personaInstituciones = new ArrayList<>();
+
 
 }

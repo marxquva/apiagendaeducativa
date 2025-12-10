@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -24,10 +27,11 @@ public class UsuarioEntity {
     private Integer estado = 1;
 
     @ManyToOne
-    @JoinColumn(
-            name = "id_persona_fk",
-            referencedColumnName = "id_persona"
-    )
+    @JoinColumn(name = "id_persona_fk", referencedColumnName = "id_persona")
     private PersonaEntity persona;
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<UsuarioInstitucionEntity> usuarioInstituciones = new ArrayList<>();
+
 
 }
