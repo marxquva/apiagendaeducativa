@@ -54,7 +54,6 @@ public class PersonaServiceImpl implements PersonaService {
         return personasPage.map(persona -> mapToPersonaResponseDTO(persona, null));
     }
 
-
     @Override
     public List<PersonaResponseDTO> obtenerPersonasPorInstitucion(Integer idInstitucion) {
 
@@ -200,6 +199,5 @@ public class PersonaServiceImpl implements PersonaService {
 
         return personaDto;
     }
-
 
 }

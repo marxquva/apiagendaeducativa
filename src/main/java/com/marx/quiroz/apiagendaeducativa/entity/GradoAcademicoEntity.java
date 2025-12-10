@@ -4,13 +4,25 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Table(name="ms_grado_academico")
+@Table(name = "ms_grado_academico",
+        uniqueConstraints = @UniqueConstraint(
+                name = "uk_grado_combinacion",
+                columnNames = {
+                        "nombre_grado",
+                        "id_anio_academico_fk",
+                        "id_institucion_fk",
+                        "id_nivel_academico_fk",
+                        "id_turno_fk"
+                }
+        )
+)
 public class GradoAcademicoEntity {
 
     @Id
@@ -26,6 +38,12 @@ public class GradoAcademicoEntity {
 
     @Column(name = "numero_vacante")
     private Integer numeroVacante;
+
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
+
+    @Column(name = "fecha_modificacion")
+    private LocalDateTime fechaModificacion;
 
     @Column(name = "estado")
     private Integer estado = 1;
