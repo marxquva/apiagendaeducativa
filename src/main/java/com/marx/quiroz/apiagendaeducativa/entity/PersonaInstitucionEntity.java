@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -13,6 +15,15 @@ public class PersonaInstitucionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_persona_institucion")
     private Integer idPersonaInstitucion;
+
+    @Column(name = "fecha_creacion")
+    private LocalDateTime fechaCreacion = LocalDateTime.now();
+
+    @Column(name = "fecha_modificacion")
+    private LocalDateTime fechaModificacion;
+
+    @Column(name = "estado")
+    private Integer estado = 1;
 
     @ManyToOne
     @JoinColumn(name = "id_persona_fk")

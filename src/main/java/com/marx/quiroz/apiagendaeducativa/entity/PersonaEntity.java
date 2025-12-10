@@ -59,5 +59,9 @@ public class PersonaEntity {
     @OneToMany(mappedBy = "persona", fetch = FetchType.LAZY)
     private List<PersonaInstitucionEntity> personaInstituciones = new ArrayList<>();
 
+    @OneToMany(mappedBy = "persona")
+    private List<UsuarioEntity> usuarios;
+
+
 
 }

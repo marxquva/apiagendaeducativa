@@ -2,7 +2,7 @@ package com.marx.quiroz.apiagendaeducativa.service.impl;
 
 import com.marx.quiroz.apiagendaeducativa.dto.request.RegistroRequestDTO;
 import com.marx.quiroz.apiagendaeducativa.dto.response.PerfilSistemaResponseDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.RegistroResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaResponseDTO;
 import com.marx.quiroz.apiagendaeducativa.dto.response.RolAcademicoResponseDTO;
 import com.marx.quiroz.apiagendaeducativa.dto.response.UsuarioResponseDTO;
 import com.marx.quiroz.apiagendaeducativa.entity.*;
@@ -43,7 +43,7 @@ public class RegistroServiceImpl implements RegistroService {
 
     @Override
     @Transactional
-    public RegistroResponseDTO registrarPersonaUsuario(RegistroRequestDTO registroDto) {
+    public PersonaResponseDTO registrarPersonaUsuario(RegistroRequestDTO registroDto) {
 
         PersonaEntity persona;
         Optional<PersonaEntity> personaOptional = personaRepository.findByNumeroDocumento(registroDto.getNumeroDocumento());
@@ -122,7 +122,7 @@ public class RegistroServiceImpl implements RegistroService {
         }
 
         // Construir DTO de respuesta
-        RegistroResponseDTO response = new RegistroResponseDTO();
+        PersonaResponseDTO response = new PersonaResponseDTO();
         response.setIdPersona(persona.getIdPersona());
         response.setNombre(persona.getNombre());
         response.setApellidos(persona.getApellido());

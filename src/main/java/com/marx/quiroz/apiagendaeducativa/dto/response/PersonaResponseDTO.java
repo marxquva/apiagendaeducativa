@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class RegistroResponseDTO {
+public class PersonaResponseDTO {
     private Integer idPersona;
     private String nombre;
     private String apellidos;

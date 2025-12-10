@@ -7,4 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonaInstitucionRepository extends JpaRepository<PersonaInstitucionEntity, Integer> {
     boolean existsByPersonaIdPersonaAndInstitucionIdInstitucion(Integer idPersona, Integer idInstitucion);
+    boolean existsByPersonaIdPersonaAndInstitucionIdInstitucionAndRolAcademicoIdRolAcademico(
+            Integer idPersona,
+            Integer idInstitucion,
+            Integer idRolAcademico
+    );
 }

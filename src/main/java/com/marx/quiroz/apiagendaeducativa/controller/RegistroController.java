@@ -1,10 +1,9 @@
 package com.marx.quiroz.apiagendaeducativa.controller;
 
 import com.marx.quiroz.apiagendaeducativa.dto.request.RegistroRequestDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.RegistroResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaResponseDTO;
 import com.marx.quiroz.apiagendaeducativa.service.RegistroService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +21,8 @@ public class RegistroController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<RegistroResponseDTO> registrar(@Valid @RequestBody RegistroRequestDTO request) {
-        RegistroResponseDTO resultado = registroService.registrarPersonaUsuario(request);
+    public ResponseEntity<PersonaResponseDTO> registrar(@Valid @RequestBody RegistroRequestDTO request) {
+        PersonaResponseDTO resultado = registroService.registrarPersonaUsuario(request);
         return ResponseEntity.ok(resultado);
     }
 }
