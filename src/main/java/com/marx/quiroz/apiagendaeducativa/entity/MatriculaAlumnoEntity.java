@@ -32,17 +32,10 @@ public class MatriculaAlumnoEntity {
 
     // Relación con persona (alumno)
     @ManyToOne
-    @JoinColumn(
-            name = "id_persona_fk",
-            referencedColumnName = "id_persona"
-    )
+    @JoinColumn(name = "id_persona_fk")
     private PersonaEntity persona;
 
-    // Relación con grado académico
     @ManyToOne
-    @JoinColumn(
-            name = "id_grado_academico_fk",
-            referencedColumnName = "id_grado_academico"
-    )
+    @JoinColumn(name = "id_grado_academico_fk")
     private GradoAcademicoEntity gradoAcademico;
 }

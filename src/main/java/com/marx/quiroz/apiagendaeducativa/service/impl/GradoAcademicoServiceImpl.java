@@ -1,6 +1,7 @@
 package com.marx.quiroz.apiagendaeducativa.service.impl;
 
 import com.marx.quiroz.apiagendaeducativa.dto.request.GradoAcademicoCreateDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.response.CursoSimpleResponseDTO;
 import com.marx.quiroz.apiagendaeducativa.dto.response.GradoAcademicoResponseDTO;
 import com.marx.quiroz.apiagendaeducativa.entity.*;
 import com.marx.quiroz.apiagendaeducativa.exception.InvalidOperationException;
@@ -115,27 +116,40 @@ public class GradoAcademicoServiceImpl implements GradoAcademicoService {
         return mapToResponse(gradoRepository.save(grado));
     }
 
-    private GradoAcademicoResponseDTO mapToResponse(GradoAcademicoEntity g) {
+    private GradoAcademicoResponseDTO mapToResponse(GradoAcademicoEntity grado) {
 
         GradoAcademicoResponseDTO dto = new GradoAcademicoResponseDTO();
 
-        dto.setIdGradoAcademico(g.getIdGradoAcademico());
-        dto.setNombreGrado(g.getNombreGrado());
-        dto.setDescripcionAula(g.getDescripcionAula());
-        dto.setNumeroVacante(g.getNumeroVacante());
-        dto.setEstado(g.getEstado());
+        dto.setIdGradoAcademico(grado.getIdGradoAcademico());
+        dto.setNombreGrado(grado.getNombreGrado());
+        dto.setDescripcionAula(grado.getDescripcionAula());
+        dto.setNumeroVacante(grado.getNumeroVacante());
+        dto.setEstado(grado.getEstado());
 
-        dto.setIdAnioAcademico(g.getAnioAcademico().getIdAnioAcademico());
-        dto.setCodigo(g.getAnioAcademico().getCodigo());
+        //dto.setIdAnioAcademico(g.getAnioAcademico().getIdAnioAcademico());
+        dto.setCodigo(grado.getAnioAcademico().getCodigo());
 
-        dto.setIdInstitucion(g.getInstitucion().getIdInstitucion());
-        dto.setNombreInstitucion(g.getInstitucion().getNombreInstitucion());
+        //dto.setIdInstitucion(g.getInstitucion().getIdInstitucion());
+        dto.setNombreInstitucion(grado.getInstitucion().getNombreInstitucion());
 
-        dto.setIdNivelAcademico(g.getNivelAcademico().getIdNivelAcademico());
-        dto.setNombreNivel(g.getNivelAcademico().getNombreNivelAcademico());
+        //dto.setIdNivelAcademico(g.getNivelAcademico().getIdNivelAcademico());
+        dto.setNombreNivel(grado.getNivelAcademico().getNombreNivelAcademico());
 
-        dto.setIdTurno(g.getTurno().getIdTurno());
-        dto.setNombreTurno(g.getTurno().getNombreTurno());
+        //dto.setIdTurno(g.getTurno().getIdTurno());
+        dto.setNombreTurno(grado.getTurno().getNombreTurno());
+
+        // === CURSOS DEL GRADO ===
+        List<CursoSimpleResponseDTO> cursos = grado.getCursos() != null
+                ? grado.getCursos().stream()
+                .map(cg -> new CursoSimpleResponseDTO(
+                        cg.getCurso().getIdCurso(),
+                        cg.getCurso().getNombreCurso()
+                ))
+                .toList()
+                : List.of();
+
+        dto.setCursos(cursos);
+        dto.setCantidadCursos(cursos.size());
 
         return dto;
     }
