@@ -1,0 +1,27 @@
+package com.marx.quiroz.apiagendaeducativa.controller;
+
+import com.marx.quiroz.apiagendaeducativa.dto.request.CursoGradoAddRequestDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.response.CursoGradoAddResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.service.CursoGradoService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/cursogrado")
+public class CursoGradoController {
+    private final CursoGradoService cursoGradoService;
+
+    public CursoGradoController(CursoGradoService cursoGradoService) {
+        this.cursoGradoService = cursoGradoService;
+    }
+    @PostMapping("/save")
+    public ResponseEntity<CursoGradoAddResponseDTO> asignarCursoAGrado(
+            @Valid @RequestBody CursoGradoAddRequestDTO dto) {
+
+        return ResponseEntity.ok(cursoGradoService.agregarCursoAGrado(dto));
+    }
+}

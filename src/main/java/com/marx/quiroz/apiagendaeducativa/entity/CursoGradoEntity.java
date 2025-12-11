@@ -7,7 +7,12 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name="ms_curso_grado")
+@Table(name = "ms_curso_grado",
+        uniqueConstraints = @UniqueConstraint(
+                name = "uk_curso_grado",
+                columnNames = { "id_grado_academico_fk", "id_curso_fk" }
+        )
+)
 public class CursoGradoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
