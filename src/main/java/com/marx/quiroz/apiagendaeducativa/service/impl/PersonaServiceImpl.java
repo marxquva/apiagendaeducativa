@@ -1,6 +1,6 @@
 package com.marx.quiroz.apiagendaeducativa.service.impl;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.PersonaInstitucionAddRequestDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.request.PersonaInstitucionAddRequestDto;
 import com.marx.quiroz.apiagendaeducativa.dto.response.*;
 import com.marx.quiroz.apiagendaeducativa.entity.*;
 import com.marx.quiroz.apiagendaeducativa.exception.InvalidOperationException;
@@ -38,7 +38,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public List<PersonaResponseDTO> obtenerPersonas() {
+    public List<PersonaResponseDto> obtenerPersonas() {
         return personaRepository.findAll()
                 .stream()
                 .map(persona -> mapToPersonaResponseDTO(persona, null))
@@ -46,7 +46,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public Page<PersonaResponseDTO> obtenerPersonasPaginado(int page, int size) {
+    public Page<PersonaResponseDto> obtenerPersonasPaginado(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size);
         Page<PersonaEntity> personasPage = personaRepository.findAll(pageable);
@@ -55,7 +55,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public List<PersonaResponseDTO> obtenerPersonasPorInstitucion(Integer idInstitucion) {
+    public List<PersonaResponseDto> obtenerPersonasPorInstitucion(Integer idInstitucion) {
 
         return personaRepository.findAllByInstitucion(idInstitucion)
                 .stream()
@@ -64,7 +64,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public PersonaResponseDTO obtenerPersonaPorInstitucion(Integer idInstitucion, Integer idPersona) {
+    public PersonaResponseDto obtenerPersonaPorInstitucion(Integer idInstitucion, Integer idPersona) {
 
         PersonaEntity persona = personaRepository.findByIdAndInstitucion(idPersona, idInstitucion)
                 .orElseThrow(() -> new InvalidOperationException(
@@ -75,7 +75,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public PersonaResponseDTO obtenerPersonaPorNumeroDocumento(String numeroDocumento) {
+    public PersonaResponseDto obtenerPersonaPorNumeroDocumento(String numeroDocumento) {
         PersonaEntity persona = personaRepository.findByNumeroDocumento(numeroDocumento)
                 .orElseThrow(() -> new InvalidOperationException("La persona no existe"));
 
@@ -83,7 +83,7 @@ public class PersonaServiceImpl implements PersonaService {
     }
 
     @Override
-    public PersonaResponseDTO obtenerPersonaPorDocumentoEInstitucion(String numeroDocumento, Integer idInstitucion) {
+    public PersonaResponseDto obtenerPersonaPorDocumentoEInstitucion(String numeroDocumento, Integer idInstitucion) {
 
         PersonaEntity persona = personaRepository.findByNumeroDocumento(numeroDocumento)
                 .orElseThrow(() -> new InvalidOperationException("La persona no existe"));
@@ -102,7 +102,7 @@ public class PersonaServiceImpl implements PersonaService {
 
     @Override
     @Transactional
-    public PersonaInstitucionAddResponseDTO agregarPersonaAInstitucion(PersonaInstitucionAddRequestDTO dto) {
+    public PersonaInstitucionAddResponseDto agregarPersonaAInstitucion(PersonaInstitucionAddRequestDto dto) {
 
         // 1. Persona válida
         PersonaEntity persona = personaRepository.findById(dto.getIdPersona())
@@ -138,7 +138,7 @@ public class PersonaServiceImpl implements PersonaService {
         personaInstitucionRepository.save(nuevaRelacion);
 
         // 6. Respuesta
-        return new PersonaInstitucionAddResponseDTO(
+        return new PersonaInstitucionAddResponseDto(
                 persona.getIdPersona(),
                 institucion.getIdInstitucion(),
                 rol.getIdRolAcademico(),
@@ -146,9 +146,9 @@ public class PersonaServiceImpl implements PersonaService {
         );
     }
 
-    private PersonaResponseDTO mapToPersonaResponseDTO(PersonaEntity persona, Integer idInstitucion) {
+    private PersonaResponseDto mapToPersonaResponseDTO(PersonaEntity persona, Integer idInstitucion) {
 
-        PersonaResponseDTO personaDto = new PersonaResponseDTO();
+        PersonaResponseDto personaDto = new PersonaResponseDto();
         personaDto.setIdPersona(persona.getIdPersona());
         personaDto.setNombre(persona.getNombre());
         personaDto.setApellidos(persona.getApellido());
@@ -165,15 +165,15 @@ public class PersonaServiceImpl implements PersonaService {
                 : null;
 
         if (usuario != null) {
-            UsuarioResponseDTO usuarioDTO = new UsuarioResponseDTO();
+            UsuarioResponseDto usuarioDTO = new UsuarioResponseDto();
             usuarioDTO.setIdUsuario(usuario.getIdUsuario());
             usuarioDTO.setUsername(usuario.getUsername());
 
-            List<PerfilSistemaResponseDTO> perfiles = usuario.getUsuarioInstituciones() != null
+            List<PerfilSistemaResponseDto> perfiles = usuario.getUsuarioInstituciones() != null
                     ? usuario.getUsuarioInstituciones().stream()
                     .filter(ui -> idInstitucion == null ||
                             (ui.getInstitucion() != null && ui.getInstitucion().getIdInstitucion().equals(idInstitucion)))
-                    .map(ui -> new PerfilSistemaResponseDTO(
+                    .map(ui -> new PerfilSistemaResponseDto(
                             ui.getPerfilSistema(),
                             ui.getInstitucion() != null ? ui.getInstitucion().getIdInstitucion() : null
                     ))
@@ -184,11 +184,11 @@ public class PersonaServiceImpl implements PersonaService {
             personaDto.setUsuario(usuarioDTO);
         }
 
-        List<RolAcademicoResponseDTO> roles = persona.getPersonaInstituciones() != null
+        List<RolAcademicoResponseDto> roles = persona.getPersonaInstituciones() != null
                 ? persona.getPersonaInstituciones().stream()
                 .filter(pi -> idInstitucion == null ||
                         (pi.getInstitucion() != null && pi.getInstitucion().getIdInstitucion().equals(idInstitucion)))
-                .map(pi -> new RolAcademicoResponseDTO(
+                .map(pi -> new RolAcademicoResponseDto(
                         pi.getRolAcademico(),
                         pi.getInstitucion() != null ? pi.getInstitucion().getIdInstitucion() : null
                 ))

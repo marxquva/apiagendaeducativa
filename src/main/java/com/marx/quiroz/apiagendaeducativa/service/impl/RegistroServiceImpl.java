@@ -1,10 +1,10 @@
 package com.marx.quiroz.apiagendaeducativa.service.impl;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.RegistroRequestDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.PerfilSistemaResponseDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaResponseDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.RolAcademicoResponseDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.UsuarioResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.request.RegistroRequestDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.PerfilSistemaResponseDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaResponseDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.RolAcademicoResponseDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.UsuarioResponseDto;
 import com.marx.quiroz.apiagendaeducativa.entity.*;
 import com.marx.quiroz.apiagendaeducativa.exception.InvalidOperationException;
 import com.marx.quiroz.apiagendaeducativa.repository.*;
@@ -43,7 +43,7 @@ public class RegistroServiceImpl implements RegistroService {
 
     @Override
     @Transactional
-    public PersonaResponseDTO registrarPersonaUsuario(RegistroRequestDTO registroDto) {
+    public PersonaResponseDto registrarPersonaUsuario(RegistroRequestDto registroDto) {
 
         PersonaEntity persona;
         Optional<PersonaEntity> personaOptional = personaRepository.findByNumeroDocumento(registroDto.getNumeroDocumento());
@@ -122,7 +122,7 @@ public class RegistroServiceImpl implements RegistroService {
         }
 
         // Construir DTO de respuesta
-        PersonaResponseDTO response = new PersonaResponseDTO();
+        PersonaResponseDto response = new PersonaResponseDto();
         response.setIdPersona(persona.getIdPersona());
         response.setNombre(persona.getNombre());
         response.setApellidos(persona.getApellido());
@@ -135,15 +135,15 @@ public class RegistroServiceImpl implements RegistroService {
         response.setNumeroDocumento(persona.getNumeroDocumento());
 
         // Usuario
-        UsuarioResponseDTO usuarioDTO = new UsuarioResponseDTO();
+        UsuarioResponseDto usuarioDTO = new UsuarioResponseDto();
         usuarioDTO.setIdUsuario(usuario.getIdUsuario());
         usuarioDTO.setUsername(usuario.getUsername());
 
         // Mapear perfiles de sistema asociados al usuario
-        List<PerfilSistemaResponseDTO> perfiles = usuario.getUsuarioInstituciones() != null
+        List<PerfilSistemaResponseDto> perfiles = usuario.getUsuarioInstituciones() != null
                 ? usuario.getUsuarioInstituciones()
                 .stream()
-                .map(ui -> new PerfilSistemaResponseDTO(
+                .map(ui -> new PerfilSistemaResponseDto(
                         ui.getPerfilSistema(),
                         ui.getInstitucion() != null ? ui.getInstitucion().getIdInstitucion() : null
                 ))
@@ -154,10 +154,10 @@ public class RegistroServiceImpl implements RegistroService {
 
 
         // Mapear roles académicos asociados a la persona
-        List<RolAcademicoResponseDTO> roles = persona.getPersonaInstituciones() != null
+        List<RolAcademicoResponseDto> roles = persona.getPersonaInstituciones() != null
                 ? persona.getPersonaInstituciones()
                 .stream()
-                .map(pi -> new RolAcademicoResponseDTO(
+                .map(pi -> new RolAcademicoResponseDto(
                         pi.getRolAcademico(),
                         pi.getInstitucion() != null ? pi.getInstitucion().getIdInstitucion() : null
                 ))

@@ -1,7 +1,7 @@
 package com.marx.quiroz.apiagendaeducativa.controller;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.GradoAcademicoCreateDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.GradoAcademicoResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.request.GradoAcademicoCreateDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.GradoAcademicoResponseDto;
 import com.marx.quiroz.apiagendaeducativa.service.GradoAcademicoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,26 +18,26 @@ public class GradoAcademicoController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<GradoAcademicoResponseDTO> crearGrado(@RequestBody GradoAcademicoCreateDTO gradoDto) {
+    public ResponseEntity<GradoAcademicoResponseDto> crearGrado(@RequestBody GradoAcademicoCreateDto gradoDto) {
         return ResponseEntity.ok(gradoService.crearGrado(gradoDto));
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<GradoAcademicoResponseDTO> obtenerGrado(@PathVariable Integer id) {
+    public ResponseEntity<GradoAcademicoResponseDto> obtenerGrado(@PathVariable Integer id) {
         return ResponseEntity.ok(gradoService.obtenerGrado(id));
     }
 
     @GetMapping("/list/institucion/{idInstitucion}")
-    public ResponseEntity<List<GradoAcademicoResponseDTO>> obtenerGradosPorInstitucion(
+    public ResponseEntity<List<GradoAcademicoResponseDto>> obtenerGradosPorInstitucion(
             @PathVariable Integer idInstitucion
     ) {
         return ResponseEntity.ok(gradoService.obtenerGradosPorInstitucion(idInstitucion));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<GradoAcademicoResponseDTO> actualizarGrado(
+    public ResponseEntity<GradoAcademicoResponseDto> actualizarGrado(
             @PathVariable Integer id,
-            @RequestBody GradoAcademicoCreateDTO gradoDto
+            @RequestBody GradoAcademicoCreateDto gradoDto
     ) {
         return ResponseEntity.ok(gradoService.actualizarGrado(id, gradoDto));
     }

@@ -1,7 +1,7 @@
 package com.marx.quiroz.apiagendaeducativa.service.impl;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.CursoGradoAddRequestDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.CursoGradoAddResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.request.CursoGradoAddRequestDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.CursoGradoAddResponseDto;
 import com.marx.quiroz.apiagendaeducativa.entity.CursoEntity;
 import com.marx.quiroz.apiagendaeducativa.entity.CursoGradoEntity;
 import com.marx.quiroz.apiagendaeducativa.entity.GradoAcademicoEntity;
@@ -25,7 +25,7 @@ public class CursoGradoServiceImpl implements CursoGradoService {
     }
 
     @Override
-    public CursoGradoAddResponseDTO agregarCursoAGrado(CursoGradoAddRequestDTO dto) {
+    public CursoGradoAddResponseDto agregarCursoAGrado(CursoGradoAddRequestDto dto) {
         // Validar grado
         GradoAcademicoEntity grado = gradoRepository.findById(dto.getIdGradoAcademico())
                 .orElseThrow(() -> new InvalidOperationException("El grado académico no existe"));
@@ -55,7 +55,7 @@ public class CursoGradoServiceImpl implements CursoGradoService {
 
         cursoGradoRepository.save(relacion);
 
-        return new CursoGradoAddResponseDTO(
+        return new CursoGradoAddResponseDto(
                 grado.getIdGradoAcademico(),
                 grado.getNombreGrado(),
                 curso.getIdCurso(),

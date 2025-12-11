@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PersonaResponseDTO {
+public class PersonaResponseDto {
     private Integer idPersona;
     private String nombre;
     private String apellidos;
@@ -19,8 +19,8 @@ public class PersonaResponseDTO {
     private Integer idTipoDocumento;
     private String numeroDocumento;
 
-    private UsuarioResponseDTO usuario;
+    private UsuarioResponseDto usuario;
     // Roles académicos asociados por institución
-    private List<RolAcademicoResponseDTO> rolesAcademicos;
+    private List<RolAcademicoResponseDto> rolesAcademicos;
 
 }

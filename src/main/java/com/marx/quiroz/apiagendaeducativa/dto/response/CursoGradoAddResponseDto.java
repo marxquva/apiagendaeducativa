@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CursoGradoAddResponseDTO {
+public class CursoGradoAddResponseDto {
     private Integer idGradoAcademico;
     private String nombreGradoAcademico;
     private Integer idCurso;

@@ -1,8 +1,8 @@
 package com.marx.quiroz.apiagendaeducativa.service;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.MatriculaAlumnoAddRequestDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.MatriculaAlumnoAddResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.request.MatriculaAlumnoAddRequestDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.MatriculaAlumnoAddResponseDto;
 
 public interface MatriculaAlumnoService {
-    MatriculaAlumnoAddResponseDTO matricularAlumno(MatriculaAlumnoAddRequestDTO dto);
+    MatriculaAlumnoAddResponseDto matricularAlumno(MatriculaAlumnoAddRequestDto dto);
 }

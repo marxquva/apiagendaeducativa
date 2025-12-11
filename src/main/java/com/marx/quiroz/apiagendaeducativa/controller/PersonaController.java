@@ -1,9 +1,8 @@
 package com.marx.quiroz.apiagendaeducativa.controller;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.PersonaInstitucionAddRequestDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaInstitucionAddResponseDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaResponseDTO;
-import com.marx.quiroz.apiagendaeducativa.entity.PeriodoEntity;
+import com.marx.quiroz.apiagendaeducativa.dto.request.PersonaInstitucionAddRequestDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaInstitucionAddResponseDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaResponseDto;
 import com.marx.quiroz.apiagendaeducativa.service.PersonaService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -24,12 +23,12 @@ public class PersonaController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<PersonaResponseDTO>> obtenerPersonas() {
+    public ResponseEntity<List<PersonaResponseDto>> obtenerPersonas() {
         return ResponseEntity.ok(personaService.obtenerPersonas());
     }
 
     @GetMapping("/list/paginate")
-    public ResponseEntity<Page<PersonaResponseDTO>> obtenerPersonasPaginado(
+    public ResponseEntity<Page<PersonaResponseDto>> obtenerPersonasPaginado(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
@@ -37,14 +36,14 @@ public class PersonaController {
     }
 
     @GetMapping("/list/institucion/{idInstitucion}/personas")
-    public ResponseEntity<List<PersonaResponseDTO>> obtenerPersonasPorInstitucion(
+    public ResponseEntity<List<PersonaResponseDto>> obtenerPersonasPorInstitucion(
             @PathVariable Integer idInstitucion) {
 
         return ResponseEntity.ok(personaService.obtenerPersonasPorInstitucion(idInstitucion));
     }
 
     @GetMapping("/get/institucion/{idInstitucion}/persona/{idPersona}")
-    public ResponseEntity<PersonaResponseDTO> obtenerPersonaPorInstitucion(
+    public ResponseEntity<PersonaResponseDto> obtenerPersonaPorInstitucion(
             @PathVariable Integer idInstitucion,
             @PathVariable Integer idPersona) {
 
@@ -52,13 +51,13 @@ public class PersonaController {
     }
 
     @PostMapping("/save/persona/institucion")
-    public ResponseEntity<PersonaInstitucionAddResponseDTO> agregarPersonaInstitucion(@RequestBody @Valid PersonaInstitucionAddRequestDTO dto) {
-        PersonaInstitucionAddResponseDTO persona = personaService.agregarPersonaAInstitucion(dto);
+    public ResponseEntity<PersonaInstitucionAddResponseDto> agregarPersonaInstitucion(@RequestBody @Valid PersonaInstitucionAddRequestDto dto) {
+        PersonaInstitucionAddResponseDto persona = personaService.agregarPersonaAInstitucion(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(persona);
     }
 
     @GetMapping("/search/documento/{numeroDocumento}")
-    public ResponseEntity<PersonaResponseDTO> obtenerPersonaPorNumeroDocumento(
+    public ResponseEntity<PersonaResponseDto> obtenerPersonaPorNumeroDocumento(
             @PathVariable String numeroDocumento) {
 
         return ResponseEntity.ok(
@@ -67,7 +66,7 @@ public class PersonaController {
     }
 
     @GetMapping("/search/institucion/{idInstitucion}/documento/{numeroDocumento}")
-    public ResponseEntity<PersonaResponseDTO> obtenerPersonaPorDocumentoEInstitucion(
+    public ResponseEntity<PersonaResponseDto> obtenerPersonaPorDocumentoEInstitucion(
             @PathVariable String numeroDocumento,
             @PathVariable Integer idInstitucion) {
 

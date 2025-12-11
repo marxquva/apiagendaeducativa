@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class MatriculaAlumnoAddResponseDTO {
+public class MatriculaAlumnoAddResponseDto {
     private Integer idMatricula;
     private String codigo;
     private String fechaMatricula;

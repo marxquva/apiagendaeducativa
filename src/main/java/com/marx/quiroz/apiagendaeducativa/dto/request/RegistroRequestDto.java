@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Data
-public class RegistroRequestDTO {
+public class RegistroRequestDto {
 
     @NotNull(message = "El nombre de persona es obligatorio")
     @Size(min = 3, max = 120, message = "El nombre debe tener entre 3 y 120 caracteres")

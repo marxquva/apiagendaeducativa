@@ -1,13 +1,13 @@
 package com.marx.quiroz.apiagendaeducativa.service;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.GradoAcademicoCreateDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.GradoAcademicoResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.request.GradoAcademicoCreateDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.GradoAcademicoResponseDto;
 
 import java.util.List;
 
 public interface GradoAcademicoService {
-    GradoAcademicoResponseDTO crearGrado(GradoAcademicoCreateDTO dto);
-    GradoAcademicoResponseDTO actualizarGrado(Integer id, GradoAcademicoCreateDTO dto);
-    GradoAcademicoResponseDTO obtenerGrado(Integer id);
-    List<GradoAcademicoResponseDTO> obtenerGradosPorInstitucion(Integer idInstitucion);
+    GradoAcademicoResponseDto crearGrado(GradoAcademicoCreateDto dto);
+    GradoAcademicoResponseDto actualizarGrado(Integer id, GradoAcademicoCreateDto dto);
+    GradoAcademicoResponseDto obtenerGrado(Integer id);
+    List<GradoAcademicoResponseDto> obtenerGradosPorInstitucion(Integer idInstitucion);
 }

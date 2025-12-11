@@ -1,7 +1,7 @@
 package com.marx.quiroz.apiagendaeducativa.service.impl;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.MatriculaAlumnoAddRequestDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.MatriculaAlumnoAddResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.request.MatriculaAlumnoAddRequestDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.MatriculaAlumnoAddResponseDto;
 import com.marx.quiroz.apiagendaeducativa.entity.GradoAcademicoEntity;
 import com.marx.quiroz.apiagendaeducativa.entity.MatriculaAlumnoEntity;
 import com.marx.quiroz.apiagendaeducativa.entity.PersonaEntity;
@@ -32,7 +32,7 @@ public class MatriculaAlumnoServiceImpl implements MatriculaAlumnoService {
     }
 
     @Override
-    public MatriculaAlumnoAddResponseDTO matricularAlumno(MatriculaAlumnoAddRequestDTO dto) {
+    public MatriculaAlumnoAddResponseDto matricularAlumno(MatriculaAlumnoAddRequestDto dto) {
 
         // 1. Validar persona
         PersonaEntity persona = personaRepository.findById(dto.getIdPersona())
@@ -85,7 +85,7 @@ public class MatriculaAlumnoServiceImpl implements MatriculaAlumnoService {
         matricula = matriculaRepository.save(matricula);
 
         // 7. Respuesta
-        return new MatriculaAlumnoAddResponseDTO(
+        return new MatriculaAlumnoAddResponseDto(
                 matricula.getIdMatriculaAlumno(),
                 matricula.getCodigo().toString(),
                 matricula.getFechaMatricula().toString(),

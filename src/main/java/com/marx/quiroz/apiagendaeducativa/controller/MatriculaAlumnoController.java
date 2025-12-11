@@ -1,9 +1,8 @@
 package com.marx.quiroz.apiagendaeducativa.controller;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.MatriculaAlumnoAddRequestDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.MatriculaAlumnoAddResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.request.MatriculaAlumnoAddRequestDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.MatriculaAlumnoAddResponseDto;
 import com.marx.quiroz.apiagendaeducativa.service.MatriculaAlumnoService;
-import com.marx.quiroz.apiagendaeducativa.service.MsCursoService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,8 +21,8 @@ public class MatriculaAlumnoController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<MatriculaAlumnoAddResponseDTO> matricularAlumno(
-            @RequestBody @Valid MatriculaAlumnoAddRequestDTO dto
+    public ResponseEntity<MatriculaAlumnoAddResponseDto> matricularAlumno(
+            @RequestBody @Valid MatriculaAlumnoAddRequestDto dto
     ) {
         return ResponseEntity.ok(matriculaAlumnoService.matricularAlumno(dto));
     }

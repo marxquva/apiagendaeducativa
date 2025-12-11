@@ -1,8 +1,8 @@
 package com.marx.quiroz.apiagendaeducativa.service.impl;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.GradoAcademicoCreateDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.CursoSimpleResponseDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.GradoAcademicoResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.request.GradoAcademicoCreateDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.CursoSimpleResponseDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.GradoAcademicoResponseDto;
 import com.marx.quiroz.apiagendaeducativa.entity.*;
 import com.marx.quiroz.apiagendaeducativa.exception.InvalidOperationException;
 import com.marx.quiroz.apiagendaeducativa.repository.*;
@@ -30,7 +30,7 @@ public class GradoAcademicoServiceImpl implements GradoAcademicoService {
     }
 
     @Override
-    public GradoAcademicoResponseDTO crearGrado(GradoAcademicoCreateDTO gradoDto) {
+    public GradoAcademicoResponseDto crearGrado(GradoAcademicoCreateDto gradoDto) {
 
         PeriodoEntity periodo = periodoRepository.findById(gradoDto.getIdAnioAcademico())
                 .orElseThrow(() -> new InvalidOperationException("Año académico no existe"));
@@ -72,14 +72,14 @@ public class GradoAcademicoServiceImpl implements GradoAcademicoService {
     }
 
     @Override
-    public GradoAcademicoResponseDTO obtenerGrado(Integer id) {
+    public GradoAcademicoResponseDto obtenerGrado(Integer id) {
         GradoAcademicoEntity grado = gradoRepository.findById(id)
                 .orElseThrow(() -> new InvalidOperationException("Grado no existe"));
         return mapToResponse(grado);
     }
 
     @Override
-    public List<GradoAcademicoResponseDTO> obtenerGradosPorInstitucion(Integer idInstitucion) {
+    public List<GradoAcademicoResponseDto> obtenerGradosPorInstitucion(Integer idInstitucion) {
         return gradoRepository.findAllByInstitucion_IdInstitucion(idInstitucion)
                 .stream()
                 .map(this::mapToResponse)
@@ -88,7 +88,7 @@ public class GradoAcademicoServiceImpl implements GradoAcademicoService {
 
     @Override
     @Transactional
-    public GradoAcademicoResponseDTO actualizarGrado(Integer id, GradoAcademicoCreateDTO gradoDto) {
+    public GradoAcademicoResponseDto actualizarGrado(Integer id, GradoAcademicoCreateDto gradoDto) {
 
         GradoAcademicoEntity grado = gradoRepository.findById(id)
                 .orElseThrow(() -> new InvalidOperationException("Grado no existe"));
@@ -116,9 +116,9 @@ public class GradoAcademicoServiceImpl implements GradoAcademicoService {
         return mapToResponse(gradoRepository.save(grado));
     }
 
-    private GradoAcademicoResponseDTO mapToResponse(GradoAcademicoEntity grado) {
+    private GradoAcademicoResponseDto mapToResponse(GradoAcademicoEntity grado) {
 
-        GradoAcademicoResponseDTO dto = new GradoAcademicoResponseDTO();
+        GradoAcademicoResponseDto dto = new GradoAcademicoResponseDto();
 
         dto.setIdGradoAcademico(grado.getIdGradoAcademico());
         dto.setNombreGrado(grado.getNombreGrado());
@@ -139,9 +139,9 @@ public class GradoAcademicoServiceImpl implements GradoAcademicoService {
         dto.setNombreTurno(grado.getTurno().getNombreTurno());
 
         // === CURSOS DEL GRADO ===
-        List<CursoSimpleResponseDTO> cursos = grado.getCursos() != null
+        List<CursoSimpleResponseDto> cursos = grado.getCursos() != null
                 ? grado.getCursos().stream()
-                .map(cg -> new CursoSimpleResponseDTO(
+                .map(cg -> new CursoSimpleResponseDto(
                         cg.getCurso().getIdCurso(),
                         cg.getCurso().getNombreCurso()
                 ))

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class PersonaInstitucionAddResponseDTO {
+public class PersonaInstitucionAddResponseDto {
     private Integer idPersona;
     private Integer idInstitucion;
     private Integer idRolAcademico;

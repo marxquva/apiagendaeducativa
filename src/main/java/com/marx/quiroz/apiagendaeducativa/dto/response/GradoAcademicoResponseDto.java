@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class GradoAcademicoResponseDTO {
+public class GradoAcademicoResponseDto {
     private Integer idGradoAcademico;
     private String nombreGrado;
     private String descripcionAula;
@@ -27,5 +27,5 @@ public class GradoAcademicoResponseDTO {
     private String nombreTurno;
 
     private Integer cantidadCursos;
-    private List<CursoSimpleResponseDTO> cursos;
+    private List<CursoSimpleResponseDto> cursos;
 }

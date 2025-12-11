@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PersonaInstitucionAddRequestDTO {
+public class PersonaInstitucionAddRequestDto {
     @NotNull(message = "El ID de persona es obligatorio")
     private Integer idPersona;
 

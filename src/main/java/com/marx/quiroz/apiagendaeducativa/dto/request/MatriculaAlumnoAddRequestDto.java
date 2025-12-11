@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MatriculaAlumnoAddRequestDTO {
+public class MatriculaAlumnoAddRequestDto {
     @NotNull(message = "El ID de la persona es obligatorio")
     @Positive(message = "El ID de la persona debe de ser un numero positivo")
     private Integer idPersona;

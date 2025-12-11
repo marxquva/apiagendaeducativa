@@ -1,8 +1,8 @@
 package com.marx.quiroz.apiagendaeducativa.service;
 
-import com.marx.quiroz.apiagendaeducativa.dto.request.RegistroRequestDTO;
-import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaResponseDTO;
+import com.marx.quiroz.apiagendaeducativa.dto.request.RegistroRequestDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaResponseDto;
 
 public interface RegistroService {
-    PersonaResponseDTO registrarPersonaUsuario(RegistroRequestDTO request);
+    PersonaResponseDto registrarPersonaUsuario(RegistroRequestDto request);
 }

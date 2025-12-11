@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GradoAcademicoCreateDTO {
+public class GradoAcademicoCreateDto {
     private String nombreGrado;
     private String descripcionAula;
     private Integer numeroVacante;

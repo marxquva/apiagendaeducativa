@@ -6,9 +6,9 @@ import lombok.Setter;
 import java.util.List;
 @Getter
 @Setter
-public class UsuarioResponseDTO {
+public class UsuarioResponseDto {
     private Integer idUsuario;
     private String username;
     // Perfiles de sistema asociados por institución
-    private List<PerfilSistemaResponseDTO> perfilesSistema;
+    private List<PerfilSistemaResponseDto> perfilesSistema;
 }
