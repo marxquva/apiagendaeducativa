@@ -19,6 +19,7 @@ public interface PersonaService {
     PersonaResponseDto obtenerPersonaPorDocumentoEInstitucion(String numeroDocumento, Integer idInstitucion);
 
     PersonaInstitucionAddResponseDto agregarPersonaAInstitucion(PersonaInstitucionAddRequestDto dto);
-
+    PersonaInstitucionAddResponseDto actualizarPersonaInstitucion(Integer idPersonaInstitucion, PersonaInstitucionAddRequestDto dto);
+    void eliminarPersonaInstitucion(Integer idPersonaInstitucion);
 
 }

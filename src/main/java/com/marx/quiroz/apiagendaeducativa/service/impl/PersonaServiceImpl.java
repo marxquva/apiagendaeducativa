@@ -146,6 +146,64 @@ public class PersonaServiceImpl implements PersonaService {
         );
     }
 
+    @Override
+    @Transactional
+    public PersonaInstitucionAddResponseDto actualizarPersonaInstitucion(Integer idPersonaInstitucion, PersonaInstitucionAddRequestDto dto) {
+        // 1. Buscar la relación existente
+        PersonaInstitucionEntity relacion = personaInstitucionRepository.findById(idPersonaInstitucion)
+                .orElseThrow(() -> new InvalidOperationException("La relación Persona–Institución no existe"));
+
+        // 2. Validar persona (debe coincidir con la relación actual)
+        if (!relacion.getPersona().getIdPersona().equals(dto.getIdPersona())) {
+            throw new InvalidOperationException("El ID de persona no coincide con la relación existente");
+        }
+
+        // 3. Validar institución (opcional, si quieres permitir cambio de institución)
+        if (!relacion.getInstitucion().getIdInstitucion().equals(dto.getIdInstitucion())) {
+            InstitucionEntity institucion = institucionRepository.findById(dto.getIdInstitucion())
+                    .orElseThrow(() -> new InvalidOperationException("La institución no existe"));
+            relacion.setInstitucion(institucion);
+        }
+
+        // 4. Validar rol académico
+        RolEntity rol = rolRepository.findById(dto.getIdRolAcademico())
+                .orElseThrow(() -> new InvalidOperationException("El rol académico no existe"));
+
+        // 5. Verificar que no exista otra relación con ese mismo rol en la institución
+        boolean yaExisteRol = personaInstitucionRepository
+                .findByPersona_IdPersonaAndInstitucion_IdInstitucion(relacion.getPersona().getIdPersona(), relacion.getInstitucion().getIdInstitucion())
+                .stream()
+                .anyMatch(r -> !r.getIdPersonaInstitucion().equals(idPersonaInstitucion)
+                        && r.getRolAcademico().getIdRolAcademico().equals(dto.getIdRolAcademico()));
+
+        if (yaExisteRol) {
+            throw new InvalidOperationException("La persona ya tiene asignado este rol en esta institución");
+        }
+
+        relacion.setRolAcademico(rol);
+        relacion.setFechaModificacion(java.time.LocalDateTime.now());
+
+        personaInstitucionRepository.save(relacion);
+
+        // 7. Respuesta
+        return new PersonaInstitucionAddResponseDto(
+                relacion.getPersona().getIdPersona(),
+                relacion.getInstitucion().getIdInstitucion(),
+                rol.getIdRolAcademico(),
+                rol.getNombre()
+        );
+    }
+
+    @Override
+    @Transactional
+    public void eliminarPersonaInstitucion(Integer idPersonaInstitucion) {
+        PersonaInstitucionEntity relacion = personaInstitucionRepository.findById(idPersonaInstitucion)
+                .orElseThrow(() -> new InvalidOperationException("La relación Persona–Institución no existe"));
+
+        personaInstitucionRepository.delete(relacion);
+    }
+
+
     private PersonaResponseDto mapToPersonaResponseDTO(PersonaEntity persona, Integer idInstitucion) {
 
         PersonaResponseDto personaDto = new PersonaResponseDto();

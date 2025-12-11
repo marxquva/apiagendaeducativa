@@ -1,6 +1,7 @@
 package com.marx.quiroz.apiagendaeducativa.controller;
 
 import com.marx.quiroz.apiagendaeducativa.dto.request.PersonaInstitucionAddRequestDto;
+import com.marx.quiroz.apiagendaeducativa.dto.response.ApiResponseDto;
 import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaInstitucionAddResponseDto;
 import com.marx.quiroz.apiagendaeducativa.dto.response.PersonaResponseDto;
 import com.marx.quiroz.apiagendaeducativa.service.PersonaService;
@@ -55,6 +56,29 @@ public class PersonaController {
         PersonaInstitucionAddResponseDto persona = personaService.agregarPersonaAInstitucion(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(persona);
     }
+
+    @PutMapping("/update/persona/institucion/{idPersonaInstitucion}")
+    public ResponseEntity<PersonaInstitucionAddResponseDto> actualizarPersonaInstitucion(
+            @PathVariable Integer idPersonaInstitucion,
+            @Valid @RequestBody PersonaInstitucionAddRequestDto dto) {
+
+        return ResponseEntity.ok(
+                personaService.actualizarPersonaInstitucion(idPersonaInstitucion, dto)
+        );
+    }
+
+    @DeleteMapping("/delete/persona/institucion/{idPersonaInstitucion}")
+    public ResponseEntity<ApiResponseDto> eliminarPersonaInstitucion(
+            @PathVariable Integer idPersonaInstitucion) {
+
+        personaService.eliminarPersonaInstitucion(idPersonaInstitucion);
+
+        ApiResponseDto response = new ApiResponseDto("Se ha eliminado correctamente", 200);
+        return ResponseEntity.ok(response);
+    }
+
+
+
 
     @GetMapping("/search/documento/{numeroDocumento}")
     public ResponseEntity<PersonaResponseDto> obtenerPersonaPorNumeroDocumento(

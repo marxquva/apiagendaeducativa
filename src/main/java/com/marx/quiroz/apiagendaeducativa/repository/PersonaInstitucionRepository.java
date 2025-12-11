@@ -15,7 +15,10 @@ public interface PersonaInstitucionRepository extends JpaRepository<PersonaInsti
             Integer idRolAcademico
     );
     List<PersonaInstitucionEntity>findByPersona_IdPersona(Integer idPersona);
-    List<PersonaInstitucionEntity> findByPersona_IdPersonaAndInstitucion_IdInstitucion(Integer idPersona, Integer idInstitucion);
+    List<PersonaInstitucionEntity> findByPersona_IdPersonaAndInstitucion_IdInstitucion(
+            Integer idPersona,
+            Integer idInstitucion
+    );
 
 
 }
