@@ -58,7 +58,7 @@ El proyecto aplica una arquitectura por capas, donde cada capa cumple una funci√
 En application.properties configura:
 
 ```bash
-spring.datasource.url=jdbc:mysql://localhost:3306/agenda_db
+spring.datasource.url=jdbc:postgresql://localhost:5432/agendaeducativadb
 spring.datasource.username=root
 spring.datasource.password=tu_password
 
